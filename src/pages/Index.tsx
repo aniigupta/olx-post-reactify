@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from "react";
+import Header from "@/components/Header";
+import CategoryNavigation from "@/components/CategoryNavigation";
+import CategoryGrid from "@/components/CategoryGrid";
+import LoginModal from "@/components/LoginModal";
+import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    // Show login modal after a short delay to simulate OLX behavior
+    const timer = setTimeout(() => {
+      setShowLoginModal(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <CategoryNavigation />
+      <CategoryGrid />
+      <Footer />
+      
+      <LoginModal 
+        isOpen={showLoginModal} 
+        onClose={() => setShowLoginModal(false)} 
+      />
     </div>
   );
 };
